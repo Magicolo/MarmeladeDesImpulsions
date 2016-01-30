@@ -9,7 +9,7 @@ using Zenject;
 public class ConcentrateOnHoldSystem : SystemBase, IUpdateable
 {
 	[Inject]
-	IPuzzleLevel Level;
+	IPuzzleLevel level = null;
 
 	public override IEntityGroup GetEntities()
 	{
@@ -35,7 +35,7 @@ public class ConcentrateOnHoldSystem : SystemBase, IUpdateable
 
 	public void Update()
 	{
-		Level.Concentration = Mathf.Max(Level.Concentration - TimeManager.World.DeltaTime * 0.1f, 0f);
+		level.Concentration = Mathf.Max(level.Concentration - TimeManager.World.DeltaTime * 0.1f, 0f);
 
 		for (int i = 0; i < Entities.Count; i++)
 			Update(Entities[i]);
@@ -46,7 +46,7 @@ public class ConcentrateOnHoldSystem : SystemBase, IUpdateable
 		var concentrate = entity.GetComponent<ConcentrateOnHoldComponent>();
 
 		if (concentrate.Hovering && concentrate.Clicking)
-			Level.Concentration += concentrate.ConcentrationGain * TimeManager.World.DeltaTime * 0.1f;
+			level.Concentration += concentrate.ConcentrationGain * TimeManager.World.DeltaTime * 0.1f;
 	}
 
 	void OnEvent(UIEvents identifier, IEntity entity)

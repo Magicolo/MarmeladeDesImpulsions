@@ -10,11 +10,10 @@ public class GameManager : MonoBehaviour
 {
 	public enum States
 	{
-		Idle,
+		Loading,
 		Playing,
 		Winning,
 		Losing,
-		Loading
 	}
 
 	public float WinDelay = 3f;
@@ -35,23 +34,25 @@ public class GameManager : MonoBehaviour
 
 	public void LevelSuccess()
 	{
-		SwitchState(States.Winning);
+		if (CurrentState == States.Playing)
+			SwitchState(States.Winning);
 	}
 
 	public void LevelFailure()
 	{
-		SwitchState(States.Losing);
+		if (CurrentState == States.Playing)
+			SwitchState(States.Losing);
 	}
 
 	void Update()
 	{
 		switch (CurrentState)
 		{
-			case States.Playing:
-				break;
 			case States.Loading:
 				if (loadingTask == null || loadingTask.isDone)
 					SwitchState(States.Playing);
+				break;
+			case States.Playing:
 				break;
 			case States.Winning:
 				counter -= TimeManager.Game.DeltaTime;
@@ -77,7 +78,8 @@ public class GameManager : MonoBehaviour
 	{
 		switch (CurrentState)
 		{
-			case States.Idle:
+			case States.Loading:
+				loadingTask = null;
 				break;
 			case States.Playing:
 				break;
@@ -85,16 +87,13 @@ public class GameManager : MonoBehaviour
 				break;
 			case States.Losing:
 				break;
-			case States.Loading:
-				loadingTask = null;
-				break;
 		}
 
 		CurrentState = state;
 
 		switch (CurrentState)
 		{
-			case States.Idle:
+			case States.Loading:
 				break;
 			case States.Playing:
 				break;
@@ -103,8 +102,6 @@ public class GameManager : MonoBehaviour
 				break;
 			case States.Losing:
 				counter = LoseDelay;
-				break;
-			case States.Loading:
 				break;
 		}
 	}
