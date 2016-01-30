@@ -25,8 +25,13 @@ public class ColorOverTimeSystem : SystemBase, IUpdateable
 	{
 		var colorOverTime = entity.GetComponent<TextMeshColorOverLifeTime>();
 		var lifeTime = entity.GetComponent<LifeTimeComponent>();
+		var player = EntityManager.Entities.Filter(typeof(PlayerConsentrationComponent))[0].GetComponent<PlayerConsentrationComponent>();
+		var levelData = EntityManager.Entities.Filter(typeof(LevelDataComponent))[0].GetComponent<LevelDataComponent>();
 
 		Color newColor = colorOverTime.ColorGradient.Evaluate(lifeTime.TimeRatio);
-		colorOverTime.TargetTextMesh.color = newColor;
+		Color color2 = levelData.TextColorOverConcentration.Evaluate(player.T);
+		colorOverTime.TargetTextMesh.color = Color.Lerp(newColor, color2, player.T);
+
+
 	}
 }

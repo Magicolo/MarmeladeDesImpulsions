@@ -9,6 +9,5 @@ using Pseudo;
 public class TextMeshColorOverLifeTime : ComponentBehaviour
 {
 	public Gradient ColorGradient;
-
 	public TextMesh TargetTextMesh;
 }
