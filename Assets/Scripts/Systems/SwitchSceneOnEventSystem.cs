@@ -9,7 +9,7 @@ using Zenject;
 public class SwitchSceneOnEventSystem : SystemBase
 {
 	[Inject]
-	GameManager GameManager;
+	GameManager GameManager = null;
 
 	public override IEntityGroup GetEntities()
 	{
@@ -23,17 +23,17 @@ public class SwitchSceneOnEventSystem : SystemBase
 	{
 		base.OnActivate();
 
-		EventManager.SubscribeAll((Action<Events, IEntity>)OnEvent);
+		EventManager.SubscribeAll((Action<BehaviourEvents, IEntity>)OnEvent);
 	}
 
 	public override void OnDeactivate()
 	{
 		base.OnDeactivate();
 
-		EventManager.UnsubscribeAll((Action<Events, IEntity>)OnEvent);
+		EventManager.UnsubscribeAll((Action<BehaviourEvents, IEntity>)OnEvent);
 	}
 
-	void OnEvent(Events identifier, IEntity entity)
+	void OnEvent(BehaviourEvents identifier, IEntity entity)
 	{
 		if (!Entities.Contains(entity))
 			return;
