@@ -33,6 +33,16 @@ public class GameManager : MonoBehaviour
 		loadingTask = SceneManager.LoadSceneAsync(scene);
 	}
 
+	public void LevelSuccess()
+	{
+		SwitchState(States.Winning);
+	}
+
+	public void LevelFailure()
+	{
+		SwitchState(States.Losing);
+	}
+
 	void Update()
 	{
 		switch (CurrentState)
