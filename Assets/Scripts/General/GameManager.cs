@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
 			SwitchState(States.Losing);
 	}
 
+	void Awake()
+	{
+		CurrentScene = SceneManager.GetActiveScene();
+	}
+
 	void Update()
 	{
 		switch (CurrentState)
