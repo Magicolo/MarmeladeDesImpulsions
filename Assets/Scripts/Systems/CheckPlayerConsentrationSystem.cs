@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Pseudo;
 
-public class PlayerConsentrationSystem : SystemBase, IUpdateable
+public class CheckPlayerConsentrationSystem : SystemBase, IUpdateable
 {
 	public override IEntityGroup GetEntities()
 	{
@@ -23,10 +23,10 @@ public class PlayerConsentrationSystem : SystemBase, IUpdateable
 
 	void Update(IEntity entity)
 	{
-		var playerConsentration = entity.GetComponent<PlayerConsentrationComponent>();
-		if (playerConsentration.Consentration <= 0)
-			Debug.Log("You died.");
-		//EventManager.Trigger()
-
+		var consentration = entity.GetComponent<PlayerConsentrationComponent>();
+		if (consentration.Consentration <= 0)
+			EventManager.Trigger(Events.Everything);
+		else if (consentration.Consentration >= consentration.ConsentrationNeededToWin)
+			EventManager.Trigger(Events.Everything);
 	}
 }

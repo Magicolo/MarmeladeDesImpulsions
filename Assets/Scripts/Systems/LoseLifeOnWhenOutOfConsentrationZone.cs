@@ -11,7 +11,8 @@ public class LoseLifeOnWhenOutOfConsentrationZone : SystemBase, IUpdateable
 	{
 		return EntityManager.Entities.Filter(new[]
 		{
-			typeof(void)
+			typeof(LoseLifeWhenOutOfConsentrationComponent),
+			typeof(PlayerConsentrationComponent)
 		});
 	}
 
@@ -23,6 +24,25 @@ public class LoseLifeOnWhenOutOfConsentrationZone : SystemBase, IUpdateable
 
 	void Update(IEntity entity)
 	{
+		var consentrationComponent = entity.GetComponent<PlayerConsentrationComponent>();
+		var consentrationZone = consentrationComponent.zone.WorldCircle;
+		var loseLife = entity.GetComponent<LoseLifeWhenOutOfConsentrationComponent>();
 
+		var zones = EntityManager.Entities.Filter(typeof(ConsentrationKeeperZone));
+
+		bool colideWithSomething = false;
+		foreach (var zone in zones.ToArray())
+		{
+			if (zone.GetComponent<ConsentrationKeeperZone>().zone.WorldCircle.Intersects(consentrationZone))
+			{
+				colideWithSomething = true;
+				continue;
+			}
+		}
+
+		if (colideWithSomething)
+			consentrationComponent.Consentration += Time.deltaTime * loseLife.gainPerSecond;
+		else
+			consentrationComponent.Consentration -= Time.deltaTime * loseLife.amountPerSecond;
 	}
 }

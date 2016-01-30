@@ -7,5 +7,7 @@ using Pseudo;
 
 public class PlayerConsentrationComponent : ComponentBehaviour
 {
-	public float Consconcentration;
+	public float Consentration = 50;
+	public float ConsentrationNeededToWin = 100;
+	public CircleZone zone;
 }
