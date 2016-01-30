@@ -9,13 +9,13 @@ using Zenject;
 public class TriggerConcentrationEventSystem : SystemBase, IUpdateable
 {
 	[Inject]
-	IPuzzleLevel Level;
+	IPuzzleLevel level = null;
 
 	public override IEntityGroup GetEntities()
 	{
 		return EntityManager.Entities.Filter(new[]
 		{
-			typeof(void)
+			typeof(TriggerConcentrationEventComponent)
 		});
 	}
 
@@ -29,7 +29,7 @@ public class TriggerConcentrationEventSystem : SystemBase, IUpdateable
 	{
 		var trigger = entity.GetComponent<TriggerConcentrationEventComponent>();
 
-		if (Level.Concentration >= trigger.Threshold)
+		if (level.Concentration >= trigger.Threshold)
 			EventManager.Trigger(trigger.Event, entity);
 	}
 }

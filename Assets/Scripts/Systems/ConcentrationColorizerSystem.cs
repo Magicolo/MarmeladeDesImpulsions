@@ -9,7 +9,7 @@ using Zenject;
 public class ConcentrationColorizerSystem : SystemBase, IUpdateable
 {
 	[Inject]
-	IPuzzleLevel Level = null;
+	IPuzzleLevel level = null;
 
 	public override IEntityGroup GetEntities()
 	{
@@ -30,7 +30,7 @@ public class ConcentrationColorizerSystem : SystemBase, IUpdateable
 	{
 		var time = entity.GetComponent<TimeComponent>();
 		var colorizer = entity.GetComponent<ConcentrationColorizerComponent>();
-		var value = Mathf.Clamp01(Level.Concentration * (colorizer.Concentration.Max - colorizer.Concentration.Min) + colorizer.Concentration.Min);
+		var value = Mathf.Clamp01(level.Concentration * (colorizer.Concentration.Max - colorizer.Concentration.Min) + colorizer.Concentration.Min);
 		var color = colorizer.Color.Evaluate(value);
 
 		colorizer.Renderer.color = Color.Lerp(colorizer.Renderer.color, color, time.DeltaTime * colorizer.FadeSpeed);
