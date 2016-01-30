@@ -7,6 +7,8 @@ using Pseudo;
 
 public class SwitchSceneOnEventComponent : ComponentBehaviour
 {
-	public BehaviourEvents Event;
+	public Events Event;
+	public UIEvents UIEvent;
+	public BehaviourEvents BehaviourEvent;
 	public string Scene;
 }
