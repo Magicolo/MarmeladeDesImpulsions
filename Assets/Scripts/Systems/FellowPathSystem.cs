@@ -11,7 +11,7 @@ public class FellowPathSystem : SystemBase, IUpdateable
 	{
 		return EntityManager.Entities.Filter(new[]
 		{
-			typeof(PathFellower),
+			typeof(PathFollower),
 			typeof(MouvementSpeedComponent)
 		});
 	}
@@ -24,7 +24,7 @@ public class FellowPathSystem : SystemBase, IUpdateable
 
 	void Update(IEntity entity)
 	{
-		var pathFollower = entity.GetComponent<PathFellower>();
+		var pathFollower = entity.GetComponent<PathFollower>();
 		var path = pathFollower.Path.GetComponent<SimpleWaypointsPath>();
 		var movementSpeed = entity.GetComponent<MouvementSpeedComponent>();
 
@@ -47,7 +47,7 @@ public class FellowPathSystem : SystemBase, IUpdateable
 		}
 	}
 
-	private void TendTo(PathFellower pathFollower, Transform transform, float speed)
+	private void TendTo(PathFollower pathFollower, Transform transform, float speed)
 	{
 		Vector3 direction = transform.position - pathFollower.transform.position;
 		Vector3 mouvement = direction.normalized * speed * Time.deltaTime;

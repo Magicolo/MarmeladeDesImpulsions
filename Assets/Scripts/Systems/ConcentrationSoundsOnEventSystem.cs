@@ -58,8 +58,7 @@ public class ConcentrationSoundsOnEventSystem : SystemBase
 		var scale = sound.Scale;
 
 		item.SetVolumeScale(scale.Min);
-		item.OnUpdate += i =>
-		{
+		item.OnUpdate += i => {
 			float volume = level.Concentration * (scale.Max - scale.Min) + scale.Min;
 			i.SetVolumeScale(Mathf.Clamp01(volume));
 

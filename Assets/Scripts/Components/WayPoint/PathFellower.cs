@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Pseudo;
 
 [RequireComponent(typeof(MouvementSpeedComponent))]
-public class PathFellower : ComponentBehaviour
+public class PathFollower : ComponentBehaviour
 {
 	public EntityBehaviour Path;
 	public int CurrentPathIndexTarget = -1;
