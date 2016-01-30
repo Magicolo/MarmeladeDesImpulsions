@@ -11,7 +11,7 @@ public class TriggerEventOnInputSystem : SystemBase, IUpdateable
 	{
 		return EntityManager.Entities.Filter(new[]
 		{
-			typeof(void)
+			typeof(TriggerEventOnInputComponent)
 		});
 	}
 
