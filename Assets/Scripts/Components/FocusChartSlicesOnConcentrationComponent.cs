@@ -11,4 +11,5 @@ public class FocusChartSlicesOnConcentrationComponent : ComponentBehaviour
 	public PlayerConsentrationComponent PlayerConcentration;
 
 	public MinMax Slides;
+	public MinMax FillRatio;
 }

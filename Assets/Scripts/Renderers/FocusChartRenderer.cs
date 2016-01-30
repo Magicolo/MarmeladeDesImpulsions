@@ -10,8 +10,11 @@ public class FocusChartRenderer : PMonoBehaviour
 {
 	[SerializeField, PropertyField]
 	Mesh mesh;
-	[SerializeField, PropertyField(typeof(MinAttribute), 2)]
+	[SerializeField, PropertyField(typeof(MinAttribute), 1)]
 	int slices = 2;
+	[SerializeField, PropertyField(typeof(MinAttribute), 0)]
+	float fillRatio = 0.5f;
+
 
 	public Mesh Mesh
 	{
@@ -28,6 +31,15 @@ public class FocusChartRenderer : PMonoBehaviour
 		set
 		{
 			slices = value;
+			UpdatePolygon();
+		}
+	}
+	public float FillRatio
+	{
+		get { return fillRatio; }
+		set
+		{
+			fillRatio = value;
 			UpdatePolygon();
 		}
 	}
@@ -54,8 +66,9 @@ public class FocusChartRenderer : PMonoBehaviour
 		for (int i = 0; i < Slices; i++)
 		{
 			int verticesIndex = i * 2;
-			vertices[verticesIndex] = Vector2.up.Rotate(i * (360f / Slices));
-			vertices[verticesIndex + 1] = Vector2.up.Rotate(i * (360f / Slices) + (180f / Slices));
+			float halfAngle = (360f / Slices * fillRatio) / 2;
+			vertices[verticesIndex] = Vector2.up.Rotate(i * (360f / Slices) - halfAngle);
+			vertices[verticesIndex + 1] = Vector2.up.Rotate(i * (360f / Slices) + halfAngle);
 			triangles[i * 3] = Slices * 2;
 			triangles[i * 3 + 1] = verticesIndex;
 			triangles[i * 3 + 2] = (verticesIndex + 1);
