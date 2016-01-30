@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Pseudo;
 
-public class SimpleWaypointsPath : ComponentBehaviour
+public class MouvementSpeedComponent : ComponentBehaviour
 {
-	public Transform[] Waypoints;
+	public float Speed;
 }

@@ -11,7 +11,8 @@ public class FellowPathSystem : SystemBase, IUpdateable
 	{
 		return EntityManager.Entities.Filter(new[]
 		{
-			typeof(PathFellower)
+			typeof(PathFellower),
+			typeof(MouvementSpeedComponent)
 		});
 	}
 
@@ -25,23 +26,31 @@ public class FellowPathSystem : SystemBase, IUpdateable
 	{
 		var pathFollower = entity.GetComponent<PathFellower>();
 		var path = pathFollower.Path.GetComponent<SimpleWaypointsPath>();
+		var movementSpeed = entity.GetComponent<MouvementSpeedComponent>();
 
 		Transform wp = path.Waypoints[pathFollower.CurrentPathIndexTarget];
 
-		TendTo(pathFollower, wp);
+		TendTo(pathFollower, wp, movementSpeed.Speed);
 
 		if ((pathFollower.transform.position - wp.position).magnitude <= 0.1f)
 		{
-			pathFollower.CurrentPathIndexTarget++;
-			if (pathFollower.CurrentPathIndexTarget >= path.Waypoints.Length)
-				pathFollower.CurrentPathIndexTarget = 0;
+			if (pathFollower.random)
+			{
+				pathFollower.CurrentPathIndexTarget = PRandom.Range(0, path.Waypoints.Length - 1);
+			}
+			else
+			{
+				pathFollower.CurrentPathIndexTarget++;
+				if (pathFollower.CurrentPathIndexTarget >= path.Waypoints.Length)
+					pathFollower.CurrentPathIndexTarget = 0;
+			}
 		}
 	}
 
-	private void TendTo(PathFellower pathFollower, Transform transform)
+	private void TendTo(PathFellower pathFollower, Transform transform, float speed)
 	{
 		Vector3 direction = transform.position - pathFollower.transform.position;
-		Vector3 mouvement = direction.normalized * pathFollower.Speed * Time.deltaTime;
+		Vector3 mouvement = direction.normalized * speed * Time.deltaTime;
 		pathFollower.transform.position += mouvement;
 	}
 }

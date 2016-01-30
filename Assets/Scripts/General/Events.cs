@@ -11,6 +11,7 @@ namespace Pseudo
 	{
 		public static readonly Events Win = new Events(1);
 		public static readonly Events Lose = new Events(2);
+		public static readonly Events Recycle = new Events(3);
 		public static readonly Events OnQuit = new Events(8);
 	}
 }
