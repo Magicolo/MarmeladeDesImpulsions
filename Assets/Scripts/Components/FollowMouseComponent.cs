@@ -5,10 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Pseudo;
 
-namespace Pseudo
+public class FollowMouseComponent : ComponentBehaviour
 {
-	public partial class EntityGroups
-	{
-
-	}
+	public Transform Transform;
 }
