@@ -9,6 +9,6 @@ namespace Pseudo
 {
 	public partial class Events
 	{
-
+		public static readonly Events OnQuit = new Events(8);
 	}
 }
