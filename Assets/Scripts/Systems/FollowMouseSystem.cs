@@ -24,8 +24,7 @@ public class FollowMouseSystem : SystemBase, IUpdateable
 	void Update(IEntity entity)
 	{
 		var follower = entity.GetComponent<FollowMouseComponent>();
-		PDebug.Log(follower.Time.Channel, follower.Time.TimeScale);
-		if (follower.Time.TimeScale >= 0)
+		if (follower.Time.DeltaTime > 0)
 			follower.Transform.position = Camera.main.GetMouseWorldPosition();
 	}
 }

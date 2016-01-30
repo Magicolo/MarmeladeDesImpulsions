@@ -12,7 +12,8 @@ public class LoseLifeOnWhenOutOfConsentrationZone : SystemBase, IUpdateable
 		return EntityManager.Entities.Filter(new[]
 		{
 			typeof(LoseLifeWhenOutOfConsentrationComponent),
-			typeof(PlayerConsentrationComponent)
+			typeof(PlayerConsentrationComponent),
+			typeof(TimeComponent)
 		});
 	}
 
@@ -27,6 +28,9 @@ public class LoseLifeOnWhenOutOfConsentrationZone : SystemBase, IUpdateable
 		var consentrationComponent = entity.GetComponent<PlayerConsentrationComponent>();
 		var consentrationZone = consentrationComponent.zone.WorldCircle;
 		var loseLife = entity.GetComponent<LoseLifeWhenOutOfConsentrationComponent>();
+		var time = entity.GetComponent<TimeComponent>();
+
+		if (time.DeltaTime <= 0) return;
 
 		var zones = EntityManager.Entities.Filter(typeof(ConsentrationKeeperZone));
 

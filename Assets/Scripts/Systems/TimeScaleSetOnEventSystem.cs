@@ -35,7 +35,6 @@ public class TimeScaleSetOnEventSystem : SystemBase
 		var timeScaleSetter = entity.GetComponent<TimeScaleSetOnEventComponent>();
 		if (timeScaleSetter.OnEvents.HasAny(identifier))
 		{
-			PDebug.Log(timeScaleSetter.TimeChanel, timeScaleSetter.TimeScaleOnEvent);
 			TimeManager.SetTimeScale(timeScaleSetter.TimeChanel, timeScaleSetter.TimeScaleOnEvent);
 		}
 	}

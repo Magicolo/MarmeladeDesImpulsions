@@ -12,6 +12,7 @@ public class FellowPathSystem : SystemBase, IUpdateable
 		return EntityManager.Entities.Filter(new[]
 		{
 			typeof(PathFollower),
+			typeof(TimeComponent),
 			typeof(MouvementSpeedComponent)
 		});
 	}
@@ -27,6 +28,8 @@ public class FellowPathSystem : SystemBase, IUpdateable
 		var pathFollower = entity.GetComponent<PathFollower>();
 		var path = pathFollower.Path.GetComponent<SimpleWaypointsPath>();
 		var movementSpeed = entity.GetComponent<MouvementSpeedComponent>();
+		var time = entity.GetComponent<TimeComponent>();
+		if (time.DeltaTime <= 0) return;
 
 		Transform wp = path.Waypoints[pathFollower.CurrentPathIndexTarget];
 

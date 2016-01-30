@@ -9,7 +9,7 @@ using Pseudo;
 public class PathFollower : ComponentBehaviour
 {
 	public EntityBehaviour Path;
-	public int CurrentPathIndexTarget = -1;
+	public int CurrentPathIndexTarget = 0;
 	public bool random;
 
 }
