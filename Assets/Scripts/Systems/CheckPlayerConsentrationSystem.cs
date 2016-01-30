@@ -25,8 +25,8 @@ public class CheckPlayerConsentrationSystem : SystemBase, IUpdateable
 	{
 		var consentration = entity.GetComponent<PlayerConsentrationComponent>();
 		if (consentration.Consentration <= 0)
-			EventManager.Trigger(Events.Everything);
+			EventManager.Trigger(Events.Lose);
 		else if (consentration.Consentration >= consentration.ConsentrationNeededToWin)
-			EventManager.Trigger(Events.Everything);
+			EventManager.Trigger(Events.Win);
 	}
 }

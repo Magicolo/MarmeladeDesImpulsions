@@ -9,6 +9,7 @@ namespace Pseudo
 {
 	public partial class Events
 	{
-
+		public static readonly Events Win = new Events(1);
+		public static readonly Events Lose = new Events(2);
 	}
 }
