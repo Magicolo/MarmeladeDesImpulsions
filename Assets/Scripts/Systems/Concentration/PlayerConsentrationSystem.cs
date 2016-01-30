@@ -25,8 +25,8 @@ public class PlayerConsentrationSystem : SystemBase, IUpdateable
 	{
 		var playerConsentration = entity.GetComponent<PlayerConsentrationComponent>();
 		if (playerConsentration.Consentration <= 0)
-			Debug.Log("You died.");
-		//EventManager.Trigger()
-
+			EventManager.Trigger(Events.Lose, entity);
+		if (playerConsentration.Consentration > playerConsentration.ConsentrationNeededToWin)
+			EventManager.Trigger(Events.Win, entity);
 	}
 }
