@@ -5,8 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Pseudo;
 
-public class SwitchSceneOnEventComponent : ComponentBehaviour
+public class WinOnEventComponent : ComponentBehaviour
 {
-	public BehaviourEvents Event;
-	public string Scene;
+	public Events Event;
 }

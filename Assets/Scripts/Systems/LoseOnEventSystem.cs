@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Pseudo;
 using Zenject;
 
-public class SwitchSceneOnEventSystem : SystemBase
+public class LoseOnEventSystem : SystemBase
 {
 	[Inject]
 	GameManager gameManager = null;
@@ -15,7 +15,7 @@ public class SwitchSceneOnEventSystem : SystemBase
 	{
 		return EntityManager.Entities.Filter(new[]
 		{
-			typeof(SwitchSceneOnEventComponent)
+			typeof(LoseOnEventComponent)
 		});
 	}
 
@@ -23,24 +23,24 @@ public class SwitchSceneOnEventSystem : SystemBase
 	{
 		base.OnActivate();
 
-		EventManager.SubscribeAll((Action<BehaviourEvents, IEntity>)OnEvent);
+		EventManager.SubscribeAll((Action<Events, IEntity>)OnEvent);
 	}
 
 	public override void OnDeactivate()
 	{
 		base.OnDeactivate();
 
-		EventManager.UnsubscribeAll((Action<BehaviourEvents, IEntity>)OnEvent);
+		EventManager.UnsubscribeAll((Action<Events, IEntity>)OnEvent);
 	}
 
-	void OnEvent(BehaviourEvents identifier, IEntity entity)
+	void OnEvent(Events identifier, IEntity entity)
 	{
 		if (!Entities.Contains(entity))
 			return;
 
-		var switcher = entity.GetComponent<SwitchSceneOnEventComponent>();
+		var lose = entity.GetComponent<LoseOnEventComponent>();
 
-		if (switcher.Event.HasAll(identifier))
-			gameManager.LoadScene(switcher.Scene);
+		if (lose.Event.HasAll(identifier))
+			gameManager.LevelFailure();
 	}
 }
