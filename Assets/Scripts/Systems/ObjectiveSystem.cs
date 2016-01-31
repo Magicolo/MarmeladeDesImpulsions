@@ -212,7 +212,7 @@ public class ObjectiveSystem : SystemBase
 			combo[i] = recipient.Item.Type;
 		}
 
-		ValidateItems(combo);
+		ValidateItems(combo, entity);
 	}
 
 	void UpdateButtons()
@@ -240,11 +240,46 @@ public class ObjectiveSystem : SystemBase
 		return filled;
 	}
 
-	void ValidateItems(ItemCombo combo)
+	void ValidateItems(ItemCombo combo, IEntity entity)
 	{
 		int similarity = PerfectCombo.Similarity(combo);
 		string result = similarityToResult[similarity];
 
-		PDebug.Log(combo, result);
+		var button = entity.GetComponent<ObjectiveButtonComponent>();
+		button.Result.text = result;
+
+		switch (similarity)
+		{
+			case 0:
+				EventManager.Trigger(Events.End_0, entity);
+				break;
+			case 1:
+				EventManager.Trigger(Events.End_1, entity);
+				break;
+			case 2:
+				EventManager.Trigger(Events.End_2, entity);
+				break;
+			case 3:
+				EventManager.Trigger(Events.End_3, entity);
+				break;
+			case 4:
+				EventManager.Trigger(Events.End_4, entity);
+				break;
+			case 5:
+				EventManager.Trigger(Events.End_5, entity);
+				break;
+			case 6:
+				EventManager.Trigger(Events.End_6, entity);
+				button.StartCoroutine(TriggerAfterDelay(entity));
+				break;
+		}
+	}
+
+	IEnumerator TriggerAfterDelay(IEntity entity)
+	{
+		for (float counter = 0; counter < 5f; counter += TimeManager.Game.DeltaTime)
+			yield return null;
+
+		EventManager.Trigger(Events.Win, entity);
 	}
 }
