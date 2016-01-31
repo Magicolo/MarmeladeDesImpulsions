@@ -173,12 +173,15 @@ public class ObjectiveSystem : SystemBase
 			var recipient = recipients[i].GetComponent<ObjectiveRecipientComponent>();
 			float distance = Vector3.Distance(recipient.CachedTransform.position, Camera.main.GetMouseWorldPosition());
 
-			if (distance < 0.5f && recipient.Item == null)
+			if (distance < 0.5f)
 			{
-				recipient.Item = item;
-				draggable.Locked = true;
-				draggable.CachedTransform.SetPosition(recipient.CachedTransform.position, Axes.XY);
-				break;
+				if (recipient.Item == null)
+				{
+					recipient.Item = item;
+					draggable.Locked = true;
+					draggable.CachedTransform.SetPosition(recipient.CachedTransform.position, Axes.XY);
+					break;
+				}
 			}
 			else if (recipient.Item == item)
 			{
