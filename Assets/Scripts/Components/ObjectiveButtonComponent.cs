@@ -9,4 +9,5 @@ using UnityEngine.UI;
 public class ObjectiveButtonComponent : ComponentBehaviour
 {
 	public Button Button;
+	public Text Result;
 }
