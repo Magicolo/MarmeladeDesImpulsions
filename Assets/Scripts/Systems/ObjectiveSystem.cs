@@ -228,6 +228,9 @@ public class ObjectiveSystem : SystemBase
 
 	bool RecipientsAreFilled()
 	{
+		if (recipients.Count == 0)
+			return false;
+
 		bool filled = true;
 
 		for (int i = 0; i < recipients.Count; i++)
@@ -277,7 +280,7 @@ public class ObjectiveSystem : SystemBase
 
 	IEnumerator TriggerAfterDelay(IEntity entity)
 	{
-		for (float counter = 0; counter < 5f; counter += TimeManager.Game.DeltaTime)
+		for (float counter = 0; counter < 12f; counter += TimeManager.Game.DeltaTime)
 			yield return null;
 
 		EventManager.Trigger(Events.Win, entity);
