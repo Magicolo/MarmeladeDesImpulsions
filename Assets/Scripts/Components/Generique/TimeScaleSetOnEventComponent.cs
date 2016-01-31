@@ -7,7 +7,16 @@ using Pseudo;
 
 public class TimeScaleSetOnEventComponent : ComponentBehaviour
 {
-	public TimeManager.TimeChannels TimeChanel;
-	public float TimeScaleOnEvent;
-	public Events OnEvents;
+	[Serializable]
+	public struct EventTimeScaler
+	{
+		public Events OnEvents;
+		public BehaviourEvents OnBehaviourEvents;
+
+		public TimeManager.TimeChannels TimeChanel;
+		public float TimeScaleOnEvent;
+	}
+
+	[InitializeContent]
+	public EventTimeScaler[] Events = new EventTimeScaler[0];
 }
