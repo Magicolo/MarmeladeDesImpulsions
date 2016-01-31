@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
 	void ReloadCurrentLevel()
 	{
-		LoadScene(CurrentScene.name);
+		LoadScene(SceneManager.GetActiveScene().name);
 	}
 
 	void SwitchState(States state)
