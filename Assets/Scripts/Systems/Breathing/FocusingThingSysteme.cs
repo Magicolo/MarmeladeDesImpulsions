@@ -59,7 +59,7 @@ public class FocusingThingSysteme : SystemBase, IUpdateable
 		float scale = focus.Sprite.transform.localScale.x;
 		float breathingScale = breathing.Sprite.transform.localScale.x;
 		float diff = Mathf.Abs(breathingScale - scale);
-		float growthSpeed = Mathf.Max(3f, diff * 2);
+		float growthSpeed = Mathf.Max(3.5f, diff * 2);
 
 		float growth = growthSpeed * time.DeltaTime;
 
