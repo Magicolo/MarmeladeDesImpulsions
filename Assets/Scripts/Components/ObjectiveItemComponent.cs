@@ -16,24 +16,7 @@ public class ObjectiveItemComponent : ComponentBehaviour
 		PlumeOrange,
 		PlumeBleu,
 		PlumeGroupe,
-		Encens,
-		Candle,
-		Powder,
-		Feather,
-		Rock,
-		Amulet,
-		Bell,
-		Gong,
-		Voice,
-		Dance,
-		Horn,
-		Paw,
-		Parchment,
-		Skin,
-		Dagger,
-		Phial,
-		DreamCatcher,
-		Branch
+		Encens
 	}
 
 	public Types Type;
