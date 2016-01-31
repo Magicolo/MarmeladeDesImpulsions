@@ -30,7 +30,7 @@ public class FocusingThingSysteme : SystemBase, IUpdateable
 		var player = EntityManager.Entities.Filter(typeof(PlayerConsentrationComponent))[0].GetComponent<PlayerConsentrationComponent>();
 		var focusCircle = focus.zone.WorldCircle;
 
-		if (focusCircle.Contains(Camera.main.GetMouseWorldPosition()))
+		if (focusCircle.Contains(Camera.main.GetMouseWorldPosition()) && breathing.actif)
 		{
 			focus.Sprite.color = focus.FocusedColor;
 			handleFocus(focus, time);
@@ -38,15 +38,20 @@ public class FocusingThingSysteme : SystemBase, IUpdateable
 		else
 		{
 			focus.Sprite.color = focus.UnfocusedColor;
+			focus.Sprite.transform.SetScale(new Vector3(1, 1, 1));
 		}
 
-		var scaleFocus = focus.Sprite.transform.localScale.x;
-		var scaleBreathing = breathing.IndicatorTransform.localScale.x;
+		if (breathing.actif && breathing.counter < breathing.Activatingtime)
+		{
+			var scaleFocus = focus.Sprite.transform.localScale.x;
+			var scaleBreathing = breathing.IndicatorTransform.localScale.x;
 
-		if (Mathf.Abs(scaleFocus - scaleBreathing) >= focus.precisionNeeded)
-			player.Consentration -= focus.damage * time.DeltaTime;
-		else
-			player.Consentration += focus.regen * time.DeltaTime;
+			if (Mathf.Abs(scaleFocus - scaleBreathing) >= focus.precisionNeeded)
+				player.Consentration -= focus.damage * time.DeltaTime;
+			else
+				player.Consentration += focus.regen * time.DeltaTime;
+
+		}
 	}
 
 	private void handleFocus(FocusingThingComponent focus, TimeComponent time)
