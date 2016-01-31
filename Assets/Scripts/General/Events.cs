@@ -13,5 +13,6 @@ namespace Pseudo
 		public static readonly Events Lose = new Events(2);
 		public static readonly Events Recycle = new Events(3);
 		public static readonly Events OnQuit = new Events(8);
+		public static readonly Events OnLevelWasLoaded = new Events(10);
 	}
 }
