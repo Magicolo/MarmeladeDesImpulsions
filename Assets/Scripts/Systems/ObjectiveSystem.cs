@@ -108,13 +108,13 @@ public class ObjectiveSystem : SystemBase
 
 	static readonly Dictionary<int, string> similarityToResult = new Dictionary<int, string>
 	{
-		{ 0, "YOU ARE A COMPLETE FAILURE!" },
-		{ 1, "YOU ARE ALMOST A COMPLETE FAILURE!" },
-		{ 2, "YOU ARE NOT VERY GOOD!" },
-		{ 3, "YOU ARE AVERAGE!" },
-		{ 4, "YOU ARE GETTING THERE!" },
-		{ 5, "YOU ARE ALMOST PERFECT!" },
-		{ 6, "YOU ARE PERFECT!" },
+		{ 0, "What? Nothing! Errrrrr." },
+		{ 1, "Oh... hmmm... I hope nobody was watching that." },
+		{ 2, "No! That's not right! Hrm." },
+		{ 3, "I thought that was going to be it, but clearly I'm totaly wrong." },
+		{ 4, "I can tell I'm on the right track but not in the right direction... if you know what I mean." },
+		{ 5, "Ooohhh I'm sooo close I can FEEL IT! Ahhh!" },
+		{ 6, "Ahhh rain... sweet rain... My father would be proud." },
 	};
 
 	static readonly ItemCombo PerfectCombo = new ItemCombo
