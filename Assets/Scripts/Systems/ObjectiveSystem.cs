@@ -272,6 +272,8 @@ public class ObjectiveSystem : SystemBase
 				EventManager.Trigger(Events.End_5, entity);
 				break;
 			case 6:
+				button.Rain.gameObject.SetActive(true);
+				button.Rain.Play(true);
 				EventManager.Trigger(Events.End_6, entity);
 				button.StartCoroutine(TriggerAfterDelay(entity));
 				break;
@@ -280,7 +282,7 @@ public class ObjectiveSystem : SystemBase
 
 	IEnumerator TriggerAfterDelay(IEntity entity)
 	{
-		for (float counter = 0; counter < 12f; counter += TimeManager.Game.DeltaTime)
+		for (float counter = 0; counter < 20f; counter += TimeManager.Game.DeltaTime)
 			yield return null;
 
 		EventManager.Trigger(Events.Win, entity);

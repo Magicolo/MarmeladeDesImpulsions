@@ -10,4 +10,5 @@ public class ObjectiveButtonComponent : ComponentBehaviour
 {
 	public Button Button;
 	public Text Result;
+	public ParticleSystem Rain;
 }
