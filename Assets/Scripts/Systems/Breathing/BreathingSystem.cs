@@ -63,7 +63,6 @@ public class BreathingSystem : SystemBase, IUpdateable
 		var min = node.BreatheEmptyCircleScale;
 		var max = node.BreatheFullCircleScale;
 		var t = (node.counter - node.Activatingtime) / node.BreatheInTime;
-		Debug.Log("a" + t);
 		Vector3 scale = Vector3.Lerp(new Vector3(min, min, 1), new Vector3(max, max, 1), t);
 		node.IndicatorTransform.transform.localScale = scale;
 	}
@@ -79,7 +78,6 @@ public class BreathingSystem : SystemBase, IUpdateable
 		var max = node.BreatheFullCircleScale;
 
 		var t = (node.counter - node.HoldTimeTotal) / node.BreatheOutTime;
-		Debug.Log(t);
 		Vector3 scale = Vector3.Lerp(new Vector3(max, max, 1), new Vector3(min, min, 1), t);
 		node.IndicatorTransform.transform.localScale = scale;
 	}

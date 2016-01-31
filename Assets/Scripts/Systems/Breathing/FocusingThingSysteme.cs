@@ -33,7 +33,7 @@ public class FocusingThingSysteme : SystemBase, IUpdateable
 		if (focusCircle.Contains(Camera.main.GetMouseWorldPosition()) && breathing.actif)
 		{
 			focus.Sprite.color = focus.FocusedColor;
-			handleFocus(focus, time);
+			handleFocus(focus, breathing, time);
 		}
 		else
 		{
@@ -41,7 +41,7 @@ public class FocusingThingSysteme : SystemBase, IUpdateable
 			focus.Sprite.transform.SetScale(new Vector3(1, 1, 1));
 		}
 
-		if (breathing.actif && breathing.counter < breathing.Activatingtime)
+		if (breathing.actif && breathing.counter > breathing.Activatingtime)
 		{
 			var scaleFocus = focus.Sprite.transform.localScale.x;
 			var scaleBreathing = breathing.IndicatorTransform.localScale.x;
@@ -54,13 +54,18 @@ public class FocusingThingSysteme : SystemBase, IUpdateable
 		}
 	}
 
-	private void handleFocus(FocusingThingComponent focus, TimeComponent time)
+	private void handleFocus(FocusingThingComponent focus, BreathingNode breathing, TimeComponent time)
 	{
 		float scale = focus.Sprite.transform.localScale.x;
-		float growthSpeed = 3f;
+		float breathingScale = breathing.Sprite.transform.localScale.x;
+		float diff = Mathf.Abs(breathingScale - scale);
+		float growthSpeed = Mathf.Max(3f, diff * 2);
+
+		float growth = growthSpeed * time.DeltaTime;
+
 		if (Input.GetMouseButton(0))
-			focus.Sprite.transform.SetScale(new Vector3(scale + growthSpeed * time.DeltaTime, scale + growthSpeed * time.DeltaTime, 1));
+			focus.Sprite.transform.SetScale(new Vector3(scale + growth, scale + growth, 1));
 		else if (Input.GetMouseButton(1))
-			focus.Sprite.transform.SetScale(new Vector3(scale - growthSpeed * time.DeltaTime, scale - growthSpeed * time.DeltaTime, 1));
+			focus.Sprite.transform.SetScale(new Vector3(scale - growth, scale - growth, 1));
 	}
 }

@@ -10,6 +10,13 @@ public class ObjectiveItemComponent : ComponentBehaviour
 	public enum Types
 	{
 		None,
+		CrystalGreen,
+		CrystalRed,
+		PlumeBlancheNoir,
+		PlumeOrange,
+		PlumeBleu,
+		PlumeGroupe,
+		Encens,
 		Candle,
 		Powder,
 		Feather,
