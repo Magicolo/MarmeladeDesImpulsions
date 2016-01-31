@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
 
 	public void LoadScene(string scene)
 	{
+		if (CurrentState == States.Loading)
+			return;
+
 		SwitchState(States.Loading);
 		CurrentScene = SceneManager.GetSceneByName(scene);
 		loadingTask = SceneManager.LoadSceneAsync(scene);
