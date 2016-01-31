@@ -119,9 +119,9 @@ public class ObjectiveSystem : SystemBase
 
 	static readonly ItemCombo PerfectCombo = new ItemCombo
 	{
-		Item0 = ObjectiveItemComponent.Types.Feather,
-		Item1 = ObjectiveItemComponent.Types.Powder,
-		Item2 = ObjectiveItemComponent.Types.Candle
+		Item0 = ObjectiveItemComponent.Types.CrystalGreen,
+		Item1 = ObjectiveItemComponent.Types.Encens,
+		Item2 = ObjectiveItemComponent.Types.PlumeGroupe
 	};
 
 	IEntityGroup recipients;
